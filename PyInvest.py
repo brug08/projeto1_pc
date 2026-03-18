@@ -17,6 +17,7 @@ meta = float(input('Meta financeira (R$): '))
 
 #conversao CDI
 cdi_mensal = math.pow((1+cdi_anual), 1/12) - 1
+
 #total investido
 total_investido = capital + (aporte * meses)
 
@@ -41,11 +42,9 @@ fii3 = (capital * math.pow((1+taxa_fii), meses))+(aporte * meses) * (1+ random.u
 fii4 = (capital * math.pow((1+taxa_fii), meses))+(aporte * meses) * (1+ random.uniform(-0.03, 0.03))
 fii5 = (capital * math.pow((1+taxa_fii), meses))+(aporte * meses) * (1+ random.uniform(-0.03, 0.03))
 
-lista_fii = [fii1, fii2, fii3, fii4, fii5]
-
-fii_media = statistics.mean(lista_fii)
-fii_mediana = statistics.median(lista_fii)
-fii_desvio = statistics.stdev(lista_fii)
+fii_media = statistics.mean( (fii1, fii2, fii3, fii4, fii5) )
+fii_mediana = statistics.median(( fii1, fii2, fii3, fii4, fii5 ))
+fii_desvio = statistics.stdev(( fii1, fii2, fii3, fii4, fii5 ))
 
 #DATAS
 data_simulacao = datetime.datetime.now()
@@ -53,8 +52,8 @@ data_resgate = data_simulacao + datetime.timedelta(days = meses * 30)
 
 #META
 
-meta_atingida = fii_media >= meta
-
+meta_atingida = (fii_media >= meta)
+ 
 #formatação
 capital_fmt = locale.currency(capital, grouping=True)
 total_fmt = locale.currency(total_investido, grouping=True)
